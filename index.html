@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Autofill zipcode/city</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <style type="text/css" media="screen">
+      form { width: 300px; float: left; }
+      fieldset { width: 320px; margin-top: 20px}
+      fieldset strong { display: block; margin: 0.5em 0 0em; }   
+      ul span { color: #999; }
+      input{ width:200px; }
+    </style>
+  </head>
+  <body>
+    
+    <div class="map_canvas"></div>
+    
+    <h1>Type a Danish city or zip code</h1>
+    <form>
+      <!--<label for="city">Vej:</label><br>
+      <input name="city" type="text" placeholder="Vej" />
+      <br><br>
+      <label for="city">Husnummer:</label><br>
+      <input name="street_number" type="text" placeholder="Husnummer" value=""/>
+      <br><br>-->
+      <label for="city">City</label><br>
+      <input id="city" name="locality" type="text" placeholder="City" value="">
+      <br><br>
+      <label for="city">Zip code</label><br>
+      <input id="postal_code" name="postal_code" type="text" placeholder="Zip code" value="" />
+    </form>
+
+    <script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    
+    <script src="jquery.geocomplete.min.js"></script>
+    
+    <script>
+      $(function(){
+        $("#postal_code").geocomplete({
+          country: 'DK',
+          map: ".map_canvas",
+          details: "form",
+          type: ["postal_code"]
+        });
+        
+        $("#find").click(function(){
+          $("#postal_code").trigger("geocode");
+        });
+      });
+      $(function(){
+        $("#city").geocomplete({
+          country: 'DK',
+          map: ".map_canvas",
+          details: "form",
+          types: ['(cities)']
+        });
+        
+        $("#find").click(function(){
+          $("#city").trigger("geocode");
+        });
+      });
+    </script>
+    
+  </body>
+</html>
+
